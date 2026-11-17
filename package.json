@@ -19,7 +19,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run generate-style-spec && rolldown -c rolldown.config.ts && cp ./src/reference/v8.json ./dist/latest.json",
-    "generate-style-spec": "node build/generate-style-spec.ts",
+    "generate-style-spec": "node --experimental-strip-types build/generate-style-spec.ts",
     "generate-typings": "cross-env BUILD=types rolldown -c rolldown.config.ts",
     "generate-docs": "node ${WATCH+--watch} build/generate-docs.ts",
     "start-docs": "docker run --rm -v ${PWD}:/docs zensical/zensical serve --open",
