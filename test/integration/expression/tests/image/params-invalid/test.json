@@ -1,0 +1,16 @@
+{
+  "expression": [
+    "image",
+    "pin",
+    {"colors": {"color": "#f00"}}
+  ],
+  "inputs": [],
+  "expected": {
+    "compiled": {
+      "result": "error",
+      "errors": [
+        {"key": "[2]", "error": "Unknown option \"colors\" of \"image\". The only option is \"params\"."}
+      ]
+    }
+  }
+}

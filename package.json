@@ -1,7 +1,7 @@
 {
   "name": "@maplibre/maplibre-gl-style-spec",
   "description": "a specification for maplibre styles",
-  "version": "26.8.0",
+  "version": "26.8.0-map-jr.1",
   "author": "MapLibre",
   "keywords": [
     "mapbox",
@@ -35,7 +35,7 @@
     "compile": "tsc",
     "lint": "eslint",
     "typecheck": "npm run build && tsgo --noEmit && tsgo --project tsconfig.dist.json",
-    "prepare": "npm run generate-style-spec",
+    "prepare": "npm run build",
     "fmt": "oxfmt"
   },
   "repository": {

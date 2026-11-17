@@ -1,0 +1,24 @@
+{
+  "expression": [
+    "image",
+    "pin",
+    {"params": {"color": ["get", "color"], "background": "#fff"}}
+  ],
+  "inputs": [
+    [
+      {"availableImages": ["pin"]},
+      {"properties": {"color": "#f00"}}
+    ]
+  ],
+  "expected": {
+    "compiled": {
+      "result": "success",
+      "isFeatureConstant": false,
+      "isZoomConstant": true,
+      "type": "resolvedImage"
+    },
+    "outputs": [
+      {"name": "pin", "available": true}
+    ]
+  }
+}

@@ -4469,12 +4469,26 @@
             {
               "parameters": ["image_name"],
               "output-type": "image"
+            },
+            {
+              "parameters": ["image_name", "image_options"],
+              "output-type": "image"
             }
           ],
           "parameters": [
             {
               "name": "image_name",
               "type": "string"
+            },
+            {
+              "name": "image_options",
+              "type": {
+                "params": {
+                  "type": "object",
+                  "example": {"color": ["get", "color"]},
+                  "doc": "Values for the slots of an SVG template image, by slot name. Each value is an expression. Map Jr. GL fills the slots; MapLibre GL JS resolves the image by its name and ignores `params`."
+                }
+              }
             }
           ]
         },
