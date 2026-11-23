@@ -23,13 +23,6 @@
         "styleeditor:comment": "Style generated 1677776383",
         "styleeditor:version": "3.14.159265",
         "example:object": { "String": "one", "Number": 2, "Boolean": false }
-      },
-      "values": {
-        "map-jr:images": {
-          "type": "object",
-          "example": {"station": "<svg viewBox=\"0 0 20 20\"><circle cx=\"10\" cy=\"10\" r=\"8\"/></svg>", "station-large": {"image": "https://example.com/station.png", "width": 30, "height": 30}},
-          "doc": "Images of the style, by name. A value is an SVG document or the URL of an image, as a string, or an object with such a string as `image` and optional `width` and `height`. An SVG with a `{{slot}}` is a template that the `params` of the `image` expression fill. Map Jr. GL draws these images, and an image here wins over the sprite image of the same name; it leaves out an SVG that refers to another file and limits a style to 500 images of at most 200000 characters each. MapLibre GL JS ignores the key."
-        }
       }
     },
     "center": {
@@ -936,13 +929,6 @@
       "doc": "Arbitrary properties useful to track with the layer, but do not influence rendering. Properties should be prefixed to avoid collisions, like 'maplibre:'.",
       "example": {
         "source:comment": "Hydrology FCCODE 460 - Narrow wash"
-      },
-      "values": {
-        "map-jr:ssr": {
-          "type": "object",
-          "example": {"hidden": true},
-          "doc": "Changes to the layer for the server renderer of Map Jr. GL: `hidden` (leave the layer out), `filter` (a filter that features must also pass), `minzoom`, `maxzoom`, `paint` and `layout` (properties that replace those of the same name), `simplify` (drop vertices closer than this many pixels, default 0.6) and `minSize` (drop features smaller than this many pixels, default 0.8). The map in the browser and MapLibre GL JS ignore the key."
-        }
       }
     },
     "source": {
