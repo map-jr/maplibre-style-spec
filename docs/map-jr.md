@@ -1,8 +1,9 @@
 # Additions of Map Jr. GL
 
-This fork of the MapLibre style specification adds three things that styles for Map Jr. GL use. A style that uses them
-is still valid for MapLibre GL JS. MapLibre GL JS ignores the two keys of `metadata` and the `params` of the `image`
-expression.
+This fork of the MapLibre style specification adds three things that styles for Map Jr. GL use. A style that has one of
+the two keys of `metadata` is still valid for MapLibre GL JS, which ignores the keys. MapLibre GL JS reports an error
+for an `image` expression with `params` (`"Expected two arguments."`), so a style that uses `params` works in Map Jr. GL
+only.
 
 | Addition | Belongs to | What it does |
 |---|---|---|
@@ -72,11 +73,19 @@ layer leaves gaps in the lines.
 
 ```json
 {
-  "id": "building",
-  "type": "fill",
-  "source": "openmaptiles",
-  "source-layer": "building",
-  "metadata": {"map-jr:ssr": {"hidden": true}}
+  "version": 8,
+  "sources": {
+    "openmaptiles": {"type": "vector", "url": "https://tiles.openfreemap.org/planet"}
+  },
+  "layers": [
+    {
+      "id": "building",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "building",
+      "metadata": {"map-jr:ssr": {"hidden": true}}
+    }
+  ]
 }
 ```
 
@@ -84,27 +93,38 @@ layer leaves gaps in the lines.
 
 `params` is an option of the `image` expression, in a property of a layer such as `icon-image`. It gives a value for
 each slot of an SVG template image, by slot name. Each value is an expression, so each feature can fill a slot from its
-properties.
-
-```json
-["image", "pin", {"params": {"color": ["get", "color"]}}]
-```
+properties. The template is an image with slots (`{{color}}`), from `metadata["map-jr:images"]` of the style or added
+by the application.
 
 The third argument of `image` is an object, and `params` is its only key. The value of `params` is an object of
-expressions by slot name. The validator reports an error for any other form. MapLibre GL JS resolves the image by its
-name and ignores `params`.
-
-The template is an image with slots (`{{color}}`), from `metadata["map-jr:images"]` of the style or added by the
-application:
+expressions by slot name. The validator of this fork reports an error for any other form. MapLibre GL JS accepts no
+third argument and reports the error `Expected two arguments.` for the expression.
 
 ```json
 {
+  "version": 8,
   "metadata": {
     "map-jr:images": {
       "pin": "<svg viewBox=\"0 0 20 20\"><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"{{color}}\"/></svg>"
     }
-  }
+  },
+  "sources": {
+    "places": {
+      "type": "geojson",
+      "data": {
+        "type": "Feature",
+        "properties": {"color": "#0b6e4f"},
+        "geometry": {"type": "Point", "coordinates": [-74.006, 40.7128]}
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "places",
+      "type": "symbol",
+      "source": "places",
+      "layout": {"icon-image": ["image", "pin", {"params": {"color": ["get", "color"]}}]}
+    }
+  ]
 }
 ```
-
-The rest of the specification is the [MapLibre style specification](https://maplibre.org/maplibre-style-spec/).
